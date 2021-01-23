@@ -1,0 +1,13 @@
+.running-containers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.runningc {
+    display: flex;
+    flex-basis: 20%;
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>Portainer Config</h1>
+        <form action="/portainer/auth" method="post">
+            <div class="row">
+                <form class="col s12" name="authform" id="authform">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Host" id="host" name="host" type="text" class="validate">
+                            <label for="host">Host</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="username" name="username" type="text" class="validate">
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" name="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <button type="submit" >Send</button>
+                    <a id="btn-auth" class="waves-effect waves-light btn center">Connect</a>
+                </form>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#test1">Running</a></li>
+                <li class="tab col s3"><a class="active" href="#test2">All</a></li>
+            </ul>
+        </div>
+        <div id="app-4">
+            <img :src="settings.LogoURL">
+
+            <div id="test1" class="col s12">
+                <div class="row running-containers">
+
+                    <div class="row runningc" v-for="c in runningContainers">
+                        <div style="width: 100%;">
+                            <div class="card blue-grey darken-1">
+                                <div class="card-content white-text">
+                                    <span class="card-title">{{c.Names[0].replace("/" , "")}}</span>
+                                    <p>{{c.Image}}</p>
+                                </div>
+                                <div class="card-action">
+
+                                    <div v-for="port in c.Ports">
+                                        <a :href="'http://' + host + ':' + port.PublicPort" target="_blank">{{port.PublicPort}}</a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="test2" class="col s12">
+                <ul class="collection">
+                    <li v-for="container in containers" class="collection-item avatar">
+
+                        <img src="" alt="" class="circle">
+                        <span class="title">{{container.Names[0].replace("/" , "")}}</span>
+                        <p><br> {{container.Ports}} {{container.Images}}
+                            <span class="new badge blue">5</span>
+                            <span class="new badge green">5</span>
+
+                        </p>
+
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        serviceTable = document.querySelector("ul")
+
+        fetch("/portainer")
+            .then(response => response.json())
+            .then(portainer => {
+                console.log(portainer)
+
+                var app4 = new Vue({
+                    el: '#app-4',
+                    data: {
+                        containers: JSON.parse(portainer.data),
+                        host: portainer.host.replace(":9000", ""),
+                        settings: JSON.parse(portainer.settings)
+
+                    },
+                    computed: {
+                        runningContainers () {
+                            return this.containers.filter(function(container) {
+                                return container.State === "running"
+                            })
+                        }
+                    }
+                })
+
+            })
+    </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.tabs').tabs();
+        });
+
+        $(document).ready(function() {
+            $("#btn-auth").click(function() {
+                console.log("Btn click")
+                $("#authform").submit();
+            });
+        });
+    </script>
+</body>
+
+</html>
