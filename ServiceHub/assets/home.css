@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {}
+
+body {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 15%;
+    background-color: #F6F6F6;
+    max-height: max-content;
+    padding: 1em;
+}
+
+.main {
+    display: flex;
+    background-color: #EFF0F4;
+    flex-direction: row;
+    flex-basis: inherit;
+    flex-wrap: wrap;
+}
+
+.sidebar-title {
+    margin-bottom: 2em;
+}
+
+.sidebar-title p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: medium;
+}
+
+.services {}
+
+.serv-elem {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: flex;
+    height: fit-content;
+    margin: auto;
+}
+
+.serv-elem img {
+    width: 45px;
+    margin: 1em;
+    border-radius: 50%;
+}
+
+.serv-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.serv-elem-text {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.service-title {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: row;
+    font-weight: 500;
+}
+
+.description {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: row;
+}
+
+.description>p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    font-size: smaller;
+}
+
+.top-bar {
+    display: flex;
+    flex-basis: 100%;
+    background-color: #F7F5F8;
+    flex-direction: row;
+    height: fit-content;
+}
+
+.content {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: -webkit-fill-available;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.filters {
+    display: flex;
+    flex-basis: 70%;
+    border: solid;
+    border-width: 1px;
+    border-color: #E4E4E4;
+}
+
+.filters>p {
+    margin: auto 5px auto 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #D1D1D9;
+}
+
+#search {
+    background: url(img/search.png) no-repeat scroll 10px 15px;
+    background-size: 20px;
+    padding-left: 40px;
+    flex-basis: 30%;
+    height: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    font-size: 1em;
+    border: solid;
+    border-width: 2px;
+    border-color: #62A4C6;
+}
+
+.run-btn,
+.all-btn {
+    margin: 1em;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+}
+
+.container-card {
+    margin: 1.5em;
+    display: flex;
+    flex-basis: 30%;
+    height: 15em;
+    flex-wrap: wrap;
+    background-color: #F6F6F6;
+    border-radius: 5px;
+}
+
+.left-image {
+    display: flex;
+    background-color: cornflowerblue;
+    flex-basis: 20%;
+    justify-content: start;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.container-card-body {
+    flex-basis: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    margin: 10px;
+    color: #6D7275
+}
+
+.container-image-name {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.container-info {
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    margin: 10px;
+    color: #6D7275;
+}
+
+.container-card-footer {
+    display: flex;
+    flex-direction: row;
+    border: solid;
+    border-width: 1.5px;
+    border-color: #E4E4E4;
+}
+
+.ports {
+    text-decoration: none;
+    list-style-type: none;
+    display: flex;
+    flex-basis: 100%;
+    justify-content: space-between;
+}
+
+.ports>li {
+    margin: 1em;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    color: #62A4C6;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.ports>li:hover {
+    color: cornflowerblue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ports>li>a:hover {
+    color: cornflowerblue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ports>li>a {
+    cursor: pointer;
+    color: #62A4C6;
+    font-weight: bold;
+}
+
+.active {
+    border-bottom: 2mm solid #62A4C6;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
