@@ -7,34 +7,32 @@ import (
 
 var router *gin.Engine
 
+
+
 func main() {
 
-	// Set the router as the default one provided by Gin
-	router = gin.Default()
+
+	router := gin.Default()
 
 	router.Static("/assets", "./static")
 
-	// Process the templates at the start so that they don't have to be loaded
-	// from the disk again. This makes serving HTML pages very fast.
 	router.LoadHTMLGlob("templates/*")
 
-	router.GET("/login", func(c *gin.Context) {
+	api := router.Group("/api")
+	{
+		api.GET("/books", AuthRequiredMiddleware, func(c *gin.Context) {
+			userID := c.MustGet("userID")
 
-		// Call the HTML method of the Context to render a template
-		c.HTML(
-			// Set the HTTP status to 200 (OK)
-			http.StatusOK,
+			c.JSON(200, gin.H{
+				"userId": userID,
+			})
+		})
+	}
 
-			"login.html",
+	initializeRoutes()
 
-			gin.H{
-				"title": "Login",
-			},
-		)
 
-	})
-
-	router.GET("/home", func(c *gin.Context) {
+	router.GET("/home", AuthRequiredMiddleware,func(c *gin.Context) {
 
 		c.HTML(
 			http.StatusOK,
