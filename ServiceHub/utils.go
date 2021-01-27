@@ -2,12 +2,9 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
-	"strings"
 )
 
 func post(endpoint string, contentType string, responseBody *bytes.Buffer) []byte {
@@ -26,7 +23,7 @@ func post(endpoint string, contentType string, responseBody *bytes.Buffer) []byt
 	}
 	return body
 }
-
+/*
 func get(url string, portainer *Portainer) string {
 	payload := strings.NewReader(``)
 	client := &http.Client{}
@@ -51,3 +48,4 @@ func get(url string, portainer *Portainer) string {
 	}
 	return "Error"
 }
+*/

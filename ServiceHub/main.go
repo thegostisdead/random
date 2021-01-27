@@ -1,33 +1,52 @@
 package main
 
 import (
-	"fmt"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-func newRouter() *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/hello", handler).Methods("GET")
-
-	staticFileDirectory := http.Dir("./assets/")
-	staticFileHandler := http.StripPrefix("/assets/", http.FileServer(staticFileDirectory))
-
-	r.PathPrefix("/assets/").Handler(staticFileHandler).Methods("GET")
-	r.HandleFunc("/portainer", getPortainerHandler).Methods("GET")
-	r.HandleFunc("/portainer/auth", createPortainerHandler).Methods("POST")
-	return r
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	_, _ = fmt.Fprintf(w, "Hello World!")
-}
+var router *gin.Engine
 
 func main() {
-	// The router is now formed by calling the `newRouter` constructor function
-	// that we defined above. The rest of the code stays the same
-	r := newRouter()
-	fmt.Println("Server is running...")
-	http.ListenAndServe(":8080", r)
+
+	// Set the router as the default one provided by Gin
+	router = gin.Default()
+
+	router.Static("/assets", "./static")
+
+	// Process the templates at the start so that they don't have to be loaded
+	// from the disk again. This makes serving HTML pages very fast.
+	router.LoadHTMLGlob("templates/*")
+
+	router.GET("/login", func(c *gin.Context) {
+
+		// Call the HTML method of the Context to render a template
+		c.HTML(
+			// Set the HTTP status to 200 (OK)
+			http.StatusOK,
+
+			"login.html",
+
+			gin.H{
+				"title": "Login",
+			},
+		)
+
+	})
+
+	router.GET("/home", func(c *gin.Context) {
+
+		c.HTML(
+			http.StatusOK,
+			"home.html",
+			gin.H{
+				"title": "Home",
+			},
+		)
+
+	})
+
+	// Start serving the application
+	router.Run()
 
 }
