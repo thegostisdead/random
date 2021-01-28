@@ -17,7 +17,7 @@
             <img src="../assets/img/bg.svg">
         </div>
         <div class="login-content">
-            <form action="#">
+            <form action="" method="POST" name="auth">
                 <img class="avatar" src="../assets/img/avatar.svg">
                 <h2 class="title">Welcome</h2>
                 <div class="input-div one focus">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="div">
                         <h5>Host</h5>
-                        <input type="text" class="input">
+                        <input type="text" name="host" class="input" required>
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
                     </div>
                     <div class="div">
                         <h5>Username</h5>
-                        <input type="text" class="input">
+                        <input type="text" name="username" class="input" required>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                     </div>
                     <div class="div">
                         <h5>Password</h5>
-                        <input type="password" class="input">
+                        <input name="password" type="password" class="input" required>
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
         </div>
 
 
-
+        {{ .csrfField }}
 
         </form>
     </div>

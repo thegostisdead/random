@@ -2,10 +2,26 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"strings"
 )
+
+type Users struct {
+	Host     string `form:"id"`
+	UserName string `form:"username"`
+	Password string `form:"password"`
+	Token    string ""
+}
+
+type Token struct {
+	Jwt string
+}
+
+const authHeader string = "Bearer "
 
 func post(endpoint string, contentType string, responseBody *bytes.Buffer) []byte {
 
@@ -23,13 +39,13 @@ func post(endpoint string, contentType string, responseBody *bytes.Buffer) []byt
 	}
 	return body
 }
-/*
-func get(url string, portainer *Portainer) string {
+
+func get(url string, user *Users) string {
 	payload := strings.NewReader(``)
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", url, payload)
-	fmt.Println(authHeader + portainer.Token)
-	req.Header.Add("Authorization", authHeader+portainer.Token)
+	fmt.Println(authHeader + user.Token)
+	req.Header.Add("Authorization", authHeader+user.Token)
 
 	response, err := client.Do(req)
 	fmt.Println("Response : ")
@@ -48,4 +64,3 @@ func get(url string, portainer *Portainer) string {
 	}
 	return "Error"
 }
-*/
